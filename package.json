@@ -12,5 +12,8 @@
     "marked": "^12.0.0",
     "serve": "^14.2.1",
     "chokidar": "^3.5.3"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
   }
 }
