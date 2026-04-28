@@ -299,15 +299,44 @@ function generateHTML(
   content: string,
   title: string,
   currentPath: string = "/",
-  includeSearch: boolean = false
+  includeSearch: boolean = false,
+  ogImage: string = "/assets/images/og-default.jpg",
+  description: string = config.description
 ): string {
+  const fullTitle = title !== config.title ? `${title} — ${config.title}` : config.title;
+  const canonicalUrl = `${config.siteUrl}${currentPath}`;
+  const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${config.siteUrl}${ogImage}`;
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${title}${title !== config.title ? ` — ${config.title}` : ""}</title>
-  <meta name="description" content="${config.description}">
+  <title>${fullTitle}</title>
+  <meta name="description" content="${description}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/favicon.svg">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:title" content="${fullTitle}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:image" content="${ogImageUrl}">
+  <meta property="og:site_name" content="${config.title}">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="${canonicalUrl}">
+  <meta name="twitter:title" content="${fullTitle}">
+  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="${ogImageUrl}">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="${canonicalUrl}">
+
   <link rel="alternate" type="application/rss+xml" title="${config.title} RSS Feed" href="/feed.xml">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
