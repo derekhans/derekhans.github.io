@@ -1,0 +1,16 @@
+{
+  "name": "tech-blog",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run build.ts --watch & bun run serve",
+    "build": "bun run build.ts",
+    "serve": "bunx serve _site -l 5173 --no-clipboard"
+  },
+  "devDependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^12.0.0",
+    "serve": "^14.2.1",
+    "chokidar": "^3.5.3"
+  }
+}
