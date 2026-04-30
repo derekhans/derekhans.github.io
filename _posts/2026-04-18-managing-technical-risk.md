@@ -448,4 +448,4 @@ Technical risk management separates architects who build resilient, successful s
 
 Risk management isn't overhead. It's the discipline that transforms ambitious technical goals into reliable outcomes. The time you invest identifying risks early pays dividends in avoided crises, faster incident response, and better strategic decisions.
 
-Your future self—facing a production emergency at 2 AM will thank you for building this discipline now.
+Your future self will thank you for building this discipline now.
