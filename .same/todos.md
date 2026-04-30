@@ -36,3 +36,7 @@
 ## Future Enhancements
 - [ ] Add dark mode toggle button
 - [ ] Link projects to individual project pages
+
+## Blog Post Ideas and Changes
+- [ ] Add a picture radar on the 2025-2-11 technology radar post
+
