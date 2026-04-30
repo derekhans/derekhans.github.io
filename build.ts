@@ -9,7 +9,7 @@ const config = {
   description: "Scratchpad of a Digital Technologist",
   author: "Derek Hanson",
   baseurl: "",
-  siteUrl: "https://derekhans.github.io",
+  siteUrl: "https://derekhans.com",
   postsPerPage: 5,
   copyrightYear: "2025",
 };
@@ -51,19 +51,19 @@ copyDirRecursive("assets/images", imagesDir);
 const projects = [
   {
     title: "Nuduo",
-    subtitle: "Experts for Everyone: A new technology consultancy.",
+    subtitle: "Experts for Everyone: A new technology consultancy",
     image: "/assets/images/projects/nuduo.jpg",
     url: "https://www.nuduo.com",
   },
   {
     title: "r/PowerShell Subreddit",
-    subtitle: "The largest independent PowerShell community in the world.",
+    subtitle: "The largest independent PowerShell community in the world",
     image: "/assets/images/projects/powershell.jpg",
     url: "https://www.reddit.com/r/PowerShell",
   },
   {
     title: "OttoID",
-    subtitle: "World's first AI-powered identity and access management.",
+    subtitle: "World's first AI-powered identity and access management",
     image: "/assets/images/projects/ottoid.jpg",
     url: "https://ottoid.co",
   },
@@ -579,13 +579,13 @@ fs.mkdirSync(aboutDir, { recursive: true });
 const aboutPageContent = `
   <div class="about">
     <div class="about__intro">
-      <h1 class="about__title">About Me</h1>
-      <p class="about__subtitle">Digital Technologist and Enterprise Architect with a passion for helping organizations navigate complex technology transformations. I write about what I learn along the way.</p>
+      <h1 class="about__title">About Derek Hans</h1>
+      <p class="about__subtitle">I'm a technology veteran, a technologist at heart, and I write about what I learn along the way. A lot of these musings are for myself, to organize my thoughts and findings. Hopefully it might help someone else some day.</p>
     </div>
 
     <div class="about__content">
       <h2>What I Do</h2>
-      <p>I'm an Enterprise Architect focused on helping organizations modernize their technology platforms and embrace cloud-native approaches. My work spans:</p>
+      <p>I believe that a true technologist specializes but learns enough to understand the big picture. My work spans:</p>
       <ul>
         <li>Microsoft Azure and cloud architecture</li>
         <li>Platform engineering and developer experience</li>
@@ -596,12 +596,15 @@ const aboutPageContent = `
       </ul>
 
       <h2>Background</h2>
-      <p>With years of experience across enterprise technology, I've helped organizations of all sizes transform their digital capabilities. From startups to Fortune 500 companies, I've seen what works and what doesn't when it comes to technology adoption.</p>
+      <p>With years of experience across enterprise technology, I've helped organizations of all sizes transform their digital capabilities. There aren't many practices I haven't touched. From startups to Fortune 500 companies, I've seen what works and what doesn't when it comes to technology adoption.</p>
       <p>This scratchpad is where I document my thinking, share lessons learned, and explore new ideas in the ever-evolving world of technology.</p>
 
       <h2>Philosophy</h2>
-      <p>I believe technology should enable business outcomes, not drive them. The best architectures are the ones that evolve with the organization, balancing innovation with stability.</p>
+      <p>Technology is an art and a science.</p>
+      <p>I believe in incremential improvement.
+      <p>As a geek that can talk, I try to present complex concepts in an accessible way.</p>
       <p>Simple solutions that work today are better than perfect solutions that never ship.</p>
+      <p>Measure twice, build fifty times.</p>
     </div>
   </div>
 `;
