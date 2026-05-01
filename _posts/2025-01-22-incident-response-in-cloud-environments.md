@@ -588,7 +588,7 @@ alert_metrics = {
     "false_positive_rate": 0.95
 }
 
-# This is bad—false positive rate is too high
+# This is bad, false positive rate is too high
 # Actions: Adjust thresholds, add confirmation logic
 ```
 

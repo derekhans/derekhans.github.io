@@ -115,7 +115,7 @@ Example entries:
 - **SQLite** (for local caching in edge scenarios)
 - **Deno** (exploring as alternative runtime)
 
-Trial entries have a sponsor—usually a team that is actively using the technology. The sponsor is responsible for reporting back on experiences, pitfalls, and whether the technology should graduate to "Adopt" or drop to "Hold."
+Trial entries have a sponsor, usually a team that is actively using the technology. The sponsor is responsible for reporting back on experiences, pitfalls, and whether the technology should graduate to "Adopt" or drop to "Hold."
 
 **Assess**
 
@@ -512,4 +512,4 @@ You do not need a perfect radar to start. You need a clear radar. Start with tha
 
 Over time, the radar becomes part of your culture. Teams reference it automatically. New projects check it before choosing technologies. The collective knowledge of the organization is captured in one artifact.
 
-That is when the radar becomes valuable—not as a document, but as a working part of how decisions are made.
+That is when the radar becomes valuable, not as a document, but as a working part of how decisions are made.

@@ -7,7 +7,7 @@ tags: [platform-engineering, backstage, developer-experience]
 
 I've spent the last couple of years helping teams build and adopt developer portals, and Backstage keeps coming up as the tool that actually delivers on the promise. Before Backstage, developer portals were either custom-built nightmares that nobody maintained or glorified wikis that developers ignored. Backstage changes that by giving you a framework that's extensible, community-driven, and actually useful for day-to-day development.
 
-But building a Backstage portal isn't just about installing software—it's about creating a development practice that revolves around it. That means dealing with organizational challenges like getting buy-in from skeptical teams, maintaining the portal once it's built, and measuring whether it's actually improving productivity. This post walks through how to build one, the hurdles you'll face, and why it's worth the effort.
+But building a Backstage portal isn't just about installing software, it's about creating a development practice that revolves around it. That means dealing with organizational challenges like getting buy-in from skeptical teams, maintaining the portal once it's built, and measuring whether it's actually improving productivity. This post walks through how to build one, the hurdles you'll face, and why it's worth the effort.
 
 ## What is Backstage and Why It Matters
 
@@ -15,13 +15,13 @@ Backstage started at Spotify as a way to tame their microservices chaos. They ha
 
 Backstage solves this with a single pane of glass: a catalog of all your services, templates for new projects, integrated documentation, and plugins for everything from cloud providers to security scanners. It's open source, built on React and Kubernetes, and has a huge community contributing plugins.
 
-The key insight is that Backstage isn't just a portal—it's a platform for developer self-service. Instead of emailing ops for a new service setup, developers can click a button and get a fully configured project with all the scaffolding they need.
+The key insight is that Backstage isn't just a portal, it's a platform for developer self-service. Instead of emailing ops for a new service setup, developers can click a button and get a fully configured project with all the scaffolding they need.
 
 ## Setting Up Backstage: Getting Started
 
 Starting with Backstage feels straightforward, but there are gotchas.
 
-First, you need a Kubernetes cluster. Backstage runs as a set of pods—frontend, backend, and database (usually PostgreSQL). If you're new to K8s, this can be a hurdle. Use a managed service like AKS or EKS to avoid the complexity.
+First, you need a Kubernetes cluster. Backstage runs as a set of pods, frontend, backend, and database (usually PostgreSQL). If you're new to K8s, this can be a hurdle. Use a managed service like AKS or EKS to avoid the complexity.
 
 Install via the CLI:
 
@@ -31,7 +31,7 @@ npx @backstage/create-app@latest
 
 This creates a basic app with the catalog, templates, and TechDocs. It includes sample data so you can see how it works.
 
-For production, you'll want to configure authentication. Backstage supports OAuth with GitHub, Google, or Azure AD. Set it up early—without auth, it's just a demo.
+For production, you'll want to configure authentication. Backstage supports OAuth with GitHub, Google, or Azure AD. Set it up early, without auth, it's just a demo.
 
 ```yaml
 # app-config.yaml
@@ -49,7 +49,7 @@ One team I worked with deployed Backstage to their dev cluster first. It took a 
 
 ## Building the Service Catalog: The Heart of Backstage
 
-The service catalog is where everything starts. It's a registry of all your components—services, libraries, websites, whatever you build.
+The service catalog is where everything starts. It's a registry of all your components, services, libraries, websites, whatever you build.
 
 Each component is defined by a YAML file in the repo:
 
@@ -130,7 +130,7 @@ spec:
         catalogInfoPath: catalog-info.yaml
 ```
 
-This creates a GitHub repo, sets up CI/CD with GitHub Actions, adds monitoring with Prometheus, and registers the service in the catalog—all from a form in Backstage.
+This creates a GitHub repo, sets up CI/CD with GitHub Actions, adds monitoring with Prometheus, and registers the service in the catalog, all from a form in Backstage.
 
 We started with basic templates and added complexity as we learned what teams needed. One template includes security scanning, another has multi-region deployment.
 
@@ -157,7 +157,7 @@ The trick is making it easy. We added a template that includes a docs skeleton. 
 
 ## Plugins and Integrations: Extending Backstage
 
-Backstage's power comes from plugins. The community has hundreds—GitHub, Jira, PagerDuty, AWS, Azure.
+Backstage's power comes from plugins. The community has hundreds, GitHub, Jira, PagerDuty, AWS, Azure.
 
 Install via npm:
 
@@ -169,21 +169,21 @@ For custom integrations, build your own plugin. It's React components with a bac
 
 We built a plugin that shows cost data from our cloud provider. Developers can see how much their service costs per month.
 
-Another integrated security scanning—shows vulnerabilities right in the service page.
+Another integrated security scanning, shows vulnerabilities right in the service page.
 
 ## Organizational Challenges: Adoption and Culture Change
 
 Building the portal is the easy part. Getting people to use it is hard.
 
-**Resistance from teams**: Developers are busy. Adding YAML files feels like bureaucracy. "Why can't I just code?" We addressed this by showing quick wins—templates that save hours of setup time.
+**Resistance from teams**: Developers are busy. Adding YAML files feels like bureaucracy. "Why can't I just code?" We addressed this by showing quick wins, templates that save hours of setup time.
 
 **Maintenance burden**: Who owns the portal? We created a platform team responsible for core Backstage, but service owners maintain their catalog entries. This requires training.
 
 **Skill gaps**: Not everyone knows Kubernetes or React. We ran workshops and paired with experienced devs.
 
-**Governance**: How do you ensure quality? We added policies—templates must include security scans, docs must be complete.
+**Governance**: How do you ensure quality? We added policies, templates must include security scans, docs must be complete.
 
-One company I worked with launched Backstage with fanfare. Usage was low for months. They fixed it by making it mandatory—new services must be registered, or CI fails. Also, leadership communicated that it's for developer productivity, not control.
+One company I worked with launched Backstage with fanfare. Usage was low for months. They fixed it by making it mandatory, new services must be registered, or CI fails. Also, leadership communicated that it's for developer productivity, not control.
 
 ## Benefits: Why Developer Portals Matter
 
@@ -213,8 +213,8 @@ ROI: One org calculated they saved 50 developer-weeks per quarter on setup tasks
 
 **Community**: Join the Backstage community for help and plugins.
 
-**Security**: Treat Backstage like any other app—RBAC, audits, updates.
+**Security**: Treat Backstage like any other app, RBAC, audits, updates.
 
 ## Conclusion
 
-Building a developer portal with Backstage is about more than the tech—it's about creating a practice where developers can focus on building value instead of navigating chaos. The challenges are real, but the benefits are worth it. Start with the catalog and templates, address adoption early, and build from there. Your future self will thank you when onboarding is smooth and deployments are consistent.
+Building a developer portal with Backstage is about more than the tech, it's about creating a practice where developers can focus on building value instead of navigating chaos. The challenges are real, but the benefits are worth it. Start with the catalog and templates, address adoption early, and build from there. Your future self will thank you when onboarding is smooth and deployments are consistent.

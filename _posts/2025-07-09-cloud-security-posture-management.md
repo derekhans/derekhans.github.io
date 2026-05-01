@@ -5,7 +5,7 @@ date: 2025-07-09
 tags: [security, cloud, governance]
 ---
 
-Cloud Security Posture Management, or CSPM, is the practice of continuously tracking how a cloud environment is configured, where it drifts from policy, and whether it still matches the organization’s security and compliance expectations. It is not an idea or a single tool—it is a discipline.
+Cloud Security Posture Management, or CSPM, is the practice of continuously tracking how a cloud environment is configured, where it drifts from policy, and whether it still matches the organization’s security and compliance expectations. It is not an idea or a single tool, it is a discipline.
 
 Cloud platforms move fast. Developers create resources on demand, infrastructure is defined in code, and production estates can double in size overnight. In this environment, manual inventory, once-a-quarter checklists, and tribal knowledge are no longer sufficient. CSPM exists to make cloud security visible, repeatable, and auditable.
 
@@ -238,7 +238,7 @@ If developers can see their own team's posture, they are more likely to fix it.
 
 ### 4. Automate safe remediation for low-risk items
 
-Not every finding requires human intervention. For low-risk, high-confidence issues—like disabling public blob access on non-production storage—automate remediation.
+Not every finding requires human intervention. For low-risk, high-confidence issues, like disabling public blob access on non-production storage, automate remediation.
 
 For higher-risk or service-impacting changes, use workflows and approvals.
 

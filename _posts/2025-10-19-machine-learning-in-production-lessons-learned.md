@@ -11,7 +11,7 @@ Training a model is the easy part. Putting it into production and keeping it the
 
 Machine learning is a computational approach to building systems that improve their performance on a task by learning from data, without being explicitly programmed for every case.
 
-At its core, ML is function approximation. You have training data—inputs and their associated correct outputs—and you want to build a function that generalizes: given a new input that wasn't in the training set, it produces a reasonable output. The model learns the relationship between inputs and outputs through an optimization process, typically by minimizing an error or loss function.
+At its core, ML is function approximation. You have training data, inputs and their associated correct outputs, and you want to build a function that generalizes: given a new input that wasn't in the training set, it produces a reasonable output. The model learns the relationship between inputs and outputs through an optimization process, typically by minimizing an error or loss function.
 
 The essential components are:
 
@@ -196,7 +196,7 @@ Before building a complex neural network, establish a simple baseline. A logisti
 - Whether the problem is even solvable with ML
 - How much benefit you get from added complexity
 
-A baseline also makes it obvious when a complex model isn't actually better—and that happens more often than you'd think.
+A baseline also makes it obvious when a complex model isn't actually better, and that happens more often than you'd think.
 
 ### Invest in Data Quality Early
 

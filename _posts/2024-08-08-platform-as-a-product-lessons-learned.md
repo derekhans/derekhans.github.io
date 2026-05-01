@@ -49,7 +49,7 @@ Product managers, designers, and engineers work together. Feedback is collected,
 
 ## Why Platform as a Product Matters
 
-The alternative—building platforms as projects—fails repeatedly.
+The alternative, building platforms as projects, fails repeatedly.
 
 ### The mandate problem
 

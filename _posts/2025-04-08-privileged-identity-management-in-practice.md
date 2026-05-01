@@ -5,7 +5,7 @@ date: 2025-04-08
 tags: [identity, security, governance]
 ---
 
-Privileged access is the crown jewel for attackers. If someone compromises admin credentials—whether through phishing, malware, or insider threat—the entire system is compromised.
+Privileged access is the crown jewel for attackers. If someone compromises admin credentials, whether through phishing, malware, or insider threat, the entire system is compromised.
 
 Yet privileged identity management (PIM) remains one of the least mature and most resisted capabilities in most organizations. Teams delay it, work around it, or deploy it in ways that create friction without real security benefit.
 
@@ -94,7 +94,7 @@ Teams see PIM and PAM as obstacles to agility. They perceive it as:
 - "We can't use shared credentials anymore"
 - "Every secret needs to be rotated"
 
-This perception is partly valid. Bad PAM implementation can slow delivery. But good PAM is invisible—it provides security without friction.
+This perception is partly valid. Bad PAM implementation can slow delivery. But good PAM is invisible, it provides security without friction.
 
 **4. Compliance-driven adoption is inertia**
 

@@ -673,6 +673,6 @@ The key principles:
 6. **Monitor usage** (know what clients depend on)
 7. **Provide long deprecation windows** (give clients time to migrate)
 
-Good API design takes thinking upfront, but it pays dividends for years. The best APIs feel inevitable—they are so natural that clients wonder if there was ever another way to design them.
+Good API design takes thinking upfront, but it pays dividends for years. The best APIs feel inevitable, they are so natural that clients wonder if there was ever another way to design them.
 
 Spend time on design. Your future self will thank you.

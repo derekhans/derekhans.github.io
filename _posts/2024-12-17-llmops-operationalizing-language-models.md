@@ -396,7 +396,7 @@ Limit output tokens to what you actually need:
 max_tokens: 300  # Not 2000
 ```
 
-But do not be too aggressive—if the model cannot finish its thought, quality degrades and users are frustrated.
+But do not be too aggressive, if the model cannot finish its thought, quality degrades and users are frustrated.
 
 ### 6. Quantifying cost-quality trade-offs
 

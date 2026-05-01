@@ -5,7 +5,7 @@ date: 2023-11-20
 tags: [career, architecture, leadership]
 ---
 
-The move from developer to architect isn't a promotion—it's a career change. The skills that made you a great developer won't make you a great architect.
+The move from developer to architect isn't a promotion, it's a career change. The skills that made you a great developer won't make you a great architect.
 
 ## What Changes
 

@@ -341,7 +341,7 @@ Define when and how risks escalate to leadership:
 
 ## Post-Mortem Analysis and Learning
 
-When risks materialize—when a performance issue reaches production, when a team member departs unexpectedly, when a security vulnerability exploits gaps in your system—the incident is an opportunity to improve risk management.
+When risks materialize, when a performance issue reaches production, when a team member departs unexpectedly, when a security vulnerability exploits gaps in your system, the incident is an opportunity to improve risk management.
 
 ### Blameless Post-Mortems
 
@@ -369,7 +369,7 @@ Risk Register Review: This incident matched our assessed risk "Database scaling 
 
 Updated Risk Assessment: Change impact from 4 to 5 (Critical). Implement stricter connection pool limits with alerts. Complete comprehensive load testing before next major release.
 
-New Risk Identified: "Database vendor support unresponsive during peak hours"—add to register.
+New Risk Identified: "Database vendor support unresponsive during peak hours", add to register.
 
 ### Preventing Recurring Risks
 
@@ -437,7 +437,7 @@ CLOSE
 
 ## Conclusion
 
-Technical risk management separates architects who build resilient, successful systems from those who learn painful lessons post-deployment. The framework here—identifying risks across technical, organizational, and external domains; assessing them systematically; choosing appropriate mitigation strategies; and monitoring continuously—is applicable to projects of any scale.
+Technical risk management separates architects who build resilient, successful systems from those who learn painful lessons post-deployment. The framework here, identifying risks across technical, organizational, and external domains; assessing them systematically; choosing appropriate mitigation strategies; and monitoring continuously, is applicable to projects of any scale.
 
 **Start here**:
 

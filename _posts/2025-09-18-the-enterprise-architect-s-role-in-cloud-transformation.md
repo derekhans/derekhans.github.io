@@ -141,11 +141,11 @@ Architecture requires:
 - Communication across different audiences (business, engineering, operations)
 - Willingness to challenge ideas without regard to politics
 
-These are not the same skills. You can be a great engineer and mediocre manager. You can be a great manager and weak architect. Good people leaders and good architects do exist, but they're rare—and even when they exist, asking someone to excel at both is unfair and ineffective.
+These are not the same skills. You can be a great engineer and mediocre manager. You can be a great manager and weak architect. Good people leaders and good architects do exist, but they're rare, and even when they exist, asking someone to excel at both is unfair and ineffective.
 
 ### Scope Mismatch
 
-A people leader typically oversees 5-20 people. Their span of control is bounded. An architect must influence the entire technical organization—often 100+ people, possibly spread across many teams, regions, and business units. They can't do both jobs well simultaneously.
+A people leader typically oversees 5-20 people. Their span of control is bounded. An architect must influence the entire technical organization, often 100+ people, possibly spread across many teams, regions, and business units. They can't do both jobs well simultaneously.
 
 ### The Solution: Separate Roles
 

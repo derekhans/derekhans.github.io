@@ -164,7 +164,7 @@ def call_with_retry(func, max_attempts=5):
 
 Wait times: 1s, 2s, 4s, 8s, 16s. By the fourth retry, the service has usually recovered.
 
-Add jitter (randomness) to prevent thundering herd—if 1000 clients all retry at the same time, you amplify the problem.
+Add jitter (randomness) to prevent thundering herd, if 1000 clients all retry at the same time, you amplify the problem.
 
 When to use: When calling services that might be temporarily unavailable.
 
@@ -370,7 +370,7 @@ If you found a gap, fix it. If the current behavior is acceptable, document why.
 
 **Chaos Monkey** (Netflix)
 
-Randomly kills instances in production. Named after the idea that your infrastructure should be as resilient as a monkey—if you take away one limb, it can still function.
+Randomly kills instances in production. Named after the idea that your infrastructure should be as resilient as a monkey, if you take away one limb, it can still function.
 
 **Gremlin**
 

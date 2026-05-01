@@ -9,7 +9,7 @@ In 2023, OpenAI released ChatGPT. By 2024, every executive was asking: "How do w
 
 Most organizations never had an opportunity to adopt a coherent AI strategy. They have scattered experiments. Some teams are fine-tuning their own models. Some are just buying products and mandating their use. Some are paying for multiple subscriptions without knowing it.
 
-This is called shadow AI. It is the AI equivalent of shadow IT—teams adopting technology without coordination, creating security and compliance risks, wasting money, and fragmenting the organization's AI capabilities.
+This is called shadow AI. It is the AI equivalent of shadow IT, teams adopting technology without coordination, creating security and compliance risks, wasting money, and fragmenting the organization's AI capabilities.
 
 Organizations with an AI strategy move faster, reduce risk, and extract more value from AI. Organizations without one waste resources and fall behind.
 

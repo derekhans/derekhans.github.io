@@ -7,21 +7,21 @@ tags: [azure, migration, architecture]
 
 I've led or consulted on about a dozen Azure migrations now, from small startups to Fortune 500 enterprises. Each one starts with the same optimism: "Cloud will be cheaper, faster, and more scalable." And each one hits the same reality: migration is messy, unpredictable, and full of surprises that nobody mentions in the sales presentations. The first migration I led was for a manufacturing company with 200 VMs and a bunch of legacy applications. We thought it would take 6 months. It took 14, cost twice the budget, and we had a 3-day outage during the final cutover because we missed a dependency on an old file server nobody had documented.
 
-The truth is, migrating datacenter workloads to Azure isn't just a technical exercise—it's a business transformation that touches every part of your organization. You have to deal with networking that doesn't work the way you expect, security models that are different, data that takes forever to move, applications that break in subtle ways, and people who resist the change. This post is about the real issues I've seen, the mistakes we've made, and what actually works based on those experiences.
+The truth is, migrating datacenter workloads to Azure isn't just a technical exercise, it's a business transformation that touches every part of your organization. You have to deal with networking that doesn't work the way you expect, security models that are different, data that takes forever to move, applications that break in subtle ways, and people who resist the change. This post is about the real issues I've seen, the mistakes we've made, and what actually works based on those experiences.
 
 ## Assessment and Discovery: Know What You're Moving Before You Move It
 
-The biggest mistake teams make is starting to migrate without really understanding what they have. You think you know your environment, but you don't—not the details that matter for cloud.
+The biggest mistake teams make is starting to migrate without really understanding what they have. You think you know your environment, but you don't, not the details that matter for cloud.
 
 **Application inventory** is the foundation. You need to know every application, its dependencies, versions, and interconnections. Which apps talk to which databases? Which ones have hardcoded IPs or file paths? Which ones are critical and which ones can tolerate downtime? I worked with a team that discovered during migration week that their main ERP system had a dependency on a 15-year-old file server running Windows NT. Nobody had documented it because "it just worked." That discovery added 3 months to their timeline.
 
-**Data gravity** is another killer. If you have large databases—think 50TB or more—moving that data is a project in itself. Bandwidth is limited, and Azure's data transfer tools have constraints. One financial services company I helped had a 100TB data warehouse. They thought they'd move it over a weekend. It took 6 weeks because their internet connection couldn't handle the throughput, and they had to ship Azure Data Boxes (physical appliances) back and forth.
+**Data gravity** is another killer. If you have large databases, think 50TB or more, moving that data is a project in itself. Bandwidth is limited, and Azure's data transfer tools have constraints. One financial services company I helped had a 100TB data warehouse. They thought they'd move it over a weekend. It took 6 weeks because their internet connection couldn't handle the throughput, and they had to ship Azure Data Boxes (physical appliances) back and forth.
 
 **Compliance requirements** can make or break a migration. If you're in healthcare, you need HIPAA compliance. Finance needs SOX. Europe means GDPR. Azure has regions and services designed for compliance, but you have to choose them from the start. A retail company I worked with migrated to Azure without checking compliance first. They put customer data in a non-compliant region and had to move it again, costing $500K in extra work.
 
 **Performance baselines** are crucial. What's your current latency? Throughput? SLAs? You need to measure these before migration so you can compare after. Too many teams migrate and then wonder why performance is worse. It's usually because they didn't account for network latency or different VM types.
 
-The tools for this: Azure Migrate is good for automated discovery. It scans your environment and gives you reports on VMs, applications, and dependencies. But it's not perfect—it misses some custom apps or network dependencies. Supplement it with manual inventory and interviews with the people who actually run the systems.
+The tools for this: Azure Migrate is good for automated discovery. It scans your environment and gives you reports on VMs, applications, and dependencies. But it's not perfect, it misses some custom apps or network dependencies. Supplement it with manual inventory and interviews with the people who actually run the systems.
 
 ## The 6 Rs of Migration: Choosing Your Strategy
 
@@ -29,7 +29,7 @@ Microsoft talks about the 6 Rs: Rehost, Replatform, Refactor, Repurchase, Retire
 
 **Rehost (lift and shift)** is the easiest and most common. You take your VM as-is and move it to Azure. It's fast, but you don't get cloud benefits. A banking application I migrated was rehosted first. It worked, but performance was terrible because the VMs were oversized and Azure's network was different. We had to replatform it later.
 
-**Replatform** means optimizing as you move. Resize VMs, move to managed services like Azure SQL instead of SQL Server on a VM. This gives you some benefits without rewriting code. That same banking app—we resized the VMs from D8s to B4s (saving 60% on compute) and moved the database to Azure SQL Managed Instance. Performance improved, costs dropped.
+**Replatform** means optimizing as you move. Resize VMs, move to managed services like Azure SQL instead of SQL Server on a VM. This gives you some benefits without rewriting code. That same banking app, we resized the VMs from D8s to B4s (saving 60% on compute) and moved the database to Azure SQL Managed Instance. Performance improved, costs dropped.
 
 **Refactor** is re-architecting for cloud native. Break monoliths into microservices, use serverless, add auto-scaling. This is powerful but expensive and risky. A logistics company refactored their tracking system during migration. It took 18 months and doubled the budget, but now they can scale to 10x traffic without issues.
 
@@ -39,7 +39,7 @@ Microsoft talks about the 6 Rs: Rehost, Replatform, Refactor, Repurchase, Retire
 
 **Retain** is keeping things on-premises. Maybe you have specialized hardware, or compliance requirements that Azure can't meet yet. A defense contractor retained their classified systems on-premises while migrating everything else.
 
-The key lesson: Start with rehost for speed, then replatform or refactor based on what you learn. Don't try to refactor everything upfront—that's how projects fail.
+The key lesson: Start with rehost for speed, then replatform or refactor based on what you learn. Don't try to refactor everything upfront, that's how projects fail.
 
 ## Migration Waves: Don't Boil the Ocean
 
@@ -49,9 +49,9 @@ Trying to migrate everything at once is a recipe for disaster. Break it into wav
 
 **Pilot wave**: Pick 2-3 simple apps for your first wave. Test your process, tools, and team. A retail company did a pilot with their dev environment. It went smoothly, but they learned their VPN wasn't stable enough for production.
 
-**Production waves**: Business-critical systems go last, after you've ironed out the kinks. Have rollback plans for each wave—what if it fails? Can you switch back to on-premises quickly?
+**Production waves**: Business-critical systems go last, after you've ironed out the kinks. Have rollback plans for each wave, what if it fails? Can you switch back to on-premises quickly?
 
-Real case: A healthcare provider did Wave 1 with non-critical apps. Success. Wave 2 included their patient portal. Disaster— they missed a dependency on an internal DNS server. The portal was down for 4 hours. They had to rollback and fix the dependency mapping.
+Real case: A healthcare provider did Wave 1 with non-critical apps. Success. Wave 2 included their patient portal. Disaster,  they missed a dependency on an internal DNS server. The portal was down for 4 hours. They had to rollback and fix the dependency mapping.
 
 ## Networking Challenges: Connecting Your Worlds
 
@@ -59,7 +59,7 @@ Networking is where Azure migrations get complicated. Your on-premises network i
 
 **VPN vs ExpressRoute**: VPN is cheap and easy but limited in bandwidth and reliability. ExpressRoute gives you dedicated bandwidth but costs $500-2000/month per connection. A logistics company used VPN for their initial migration. It worked for small data, but when they tried to sync their warehouse database, the VPN kept dropping, causing sync failures. They switched to ExpressRoute mid-migration.
 
-**Hybrid connectivity**: You need site-to-site VPNs or ExpressRoute to connect Azure to your datacenter. Point-to-site for remote users. The complexity is in routing—making sure traffic flows correctly between environments.
+**Hybrid connectivity**: You need site-to-site VPNs or ExpressRoute to connect Azure to your datacenter. Point-to-site for remote users. The complexity is in routing, making sure traffic flows correctly between environments.
 
 **DNS migration**: Internal DNS vs external. Split-brain DNS (where internal and external resolve differently) is common. One team migrated DNS but forgot to update internal references. Apps couldn't find each other for 2 days.
 
@@ -83,11 +83,11 @@ Moving data is the part that takes the longest and costs the most.
 
 **Bandwidth limitations**: Your internet connection is the bottleneck. A 100Mbps connection can move 900GB/day max. For 50TB, that's 55 days. One company tried to migrate over their corporate internet. It took 3 months and slowed down their business network to a crawl.
 
-**Downtime windows**: Business impact is huge. You can't take systems offline forever. Plan for minimal downtime—use tools like Azure Database Migration Service for online migrations.
+**Downtime windows**: Business impact is huge. You can't take systems offline forever. Plan for minimal downtime, use tools like Azure Database Migration Service for online migrations.
 
 **Data consistency**: During migration, data is changing. How do you sync? One team migrated a database but forgot ongoing transactions. They lost 2 hours of data.
 
-**Tools**: Azure Data Box for large transfers (ship disks). DMS for databases. Custom scripts for everything else. But tools have limits—DMS can't handle complex schemas sometimes.
+**Tools**: Azure Data Box for large transfers (ship disks). DMS for databases. Custom scripts for everything else. But tools have limits, DMS can't handle complex schemas sometimes.
 
 Real disaster: A media company migrated 200TB of video content. They used Data Box but underestimated shipping time. Content was unavailable for a week during peak season.
 
@@ -183,7 +183,7 @@ If you're considering migration, do a pilot first. Learn what you don't know. Th
 
 **Retain** is keeping things on-premises. Maybe you have specialized hardware, or compliance requirements that Azure can't meet yet. A defense contractor retained their classified systems on-premises while migrating everything else.
 
-The key lesson: Start with rehost for speed, then replatform or refactor based on what you learn. Don't try to refactor everything upfront—that's how projects fail.
+The key lesson: Start with rehost for speed, then replatform or refactor based on what you learn. Don't try to refactor everything upfront, that's how projects fail.
 
 ## Migration Waves: Don't Boil the Ocean
 
@@ -193,9 +193,9 @@ Trying to migrate everything at once is a recipe for disaster. Break it into wav
 
 **Pilot wave**: Pick 2-3 simple apps for your first wave. Test your process, tools, and team. A retail company did a pilot with their dev environment. It went smoothly, but they learned their VPN wasn't stable enough for production.
 
-**Production waves**: Business-critical systems go last, after you've ironed out the kinks. Have rollback plans for each wave—what if it fails? Can you switch back to on-premises quickly?
+**Production waves**: Business-critical systems go last, after you've ironed out the kinks. Have rollback plans for each wave, what if it fails? Can you switch back to on-premises quickly?
 
-Real case: A healthcare provider did Wave 1 with non-critical apps. Success. Wave 2 included their patient portal. Disaster— they missed a dependency on an internal DNS server. The portal was down for 4 hours. They had to rollback and fix the dependency mapping.
+Real case: A healthcare provider did Wave 1 with non-critical apps. Success. Wave 2 included their patient portal. Disaster,  they missed a dependency on an internal DNS server. The portal was down for 4 hours. They had to rollback and fix the dependency mapping.
 
 ## Networking Challenges: Connecting Your Worlds
 
@@ -203,7 +203,7 @@ Networking is where Azure migrations get complicated. Your on-premises network i
 
 **VPN vs ExpressRoute**: VPN is cheap and easy but limited in bandwidth and reliability. ExpressRoute gives you dedicated bandwidth but costs $500-2000/month per connection. A logistics company used VPN for their initial migration. It worked for small data, but when they tried to sync their warehouse database, the VPN kept dropping, causing sync failures. They switched to ExpressRoute mid-migration.
 
-**Hybrid connectivity**: You need site-to-site VPNs or ExpressRoute to connect Azure to your datacenter. Point-to-site for remote users. The complexity is in routing—making sure traffic flows correctly between environments.
+**Hybrid connectivity**: You need site-to-site VPNs or ExpressRoute to connect Azure to your datacenter. Point-to-site for remote users. The complexity is in routing, making sure traffic flows correctly between environments.
 
 **DNS migration**: Internal DNS vs external. Split-brain DNS (where internal and external resolve differently) is common. One team migrated DNS but forgot to update internal references. Apps couldn't find each other for 2 days.
 
@@ -227,11 +227,11 @@ Moving data is the part that takes the longest and costs the most.
 
 **Bandwidth limitations**: Your internet connection is the bottleneck. A 100Mbps connection can move 900GB/day max. For 50TB, that's 55 days. One company tried to migrate over their corporate internet. It took 3 months and slowed down their business network to a crawl.
 
-**Downtime windows**: Business impact is huge. You can't take systems offline forever. Plan for minimal downtime—use tools like Azure Database Migration Service for online migrations.
+**Downtime windows**: Business impact is huge. You can't take systems offline forever. Plan for minimal downtime, use tools like Azure Database Migration Service for online migrations.
 
 **Data consistency**: During migration, data is changing. How do you sync? One team migrated a database but forgot ongoing transactions. They lost 2 hours of data.
 
-**Tools**: Azure Data Box for large transfers (ship disks). DMS for databases. Custom scripts for everything else. But tools have limits—DMS can't handle complex schemas sometimes.
+**Tools**: Azure Data Box for large transfers (ship disks). DMS for databases. Custom scripts for everything else. But tools have limits, DMS can't handle complex schemas sometimes.
 
 Real disaster: A media company migrated 200TB of video content. They used Data Box but underestimated shipping time. Content was unavailable for a week during peak season.
 

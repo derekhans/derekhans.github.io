@@ -5,11 +5,11 @@ date: 2026-02-11
 tags: [architecture, operations, cloud]
 ---
 
-Cloud elasticity is seductive because it promises infinite capacity. You can scale up whenever you need it, scale down when you don't, and pay only for what you use. The reality is messier. Your system will hit capacity ceilings you didn't anticipate. Database connections will exhaust faster than compute. Your cache will become a bottleneck. Regional limits will bite you when you expand geographically. And when capacity fails, it fails catastrophically—not gracefully, not with a warning, just suddenly your system can't handle the load.
+Cloud elasticity is seductive because it promises infinite capacity. You can scale up whenever you need it, scale down when you don't, and pay only for what you use. The reality is messier. Your system will hit capacity ceilings you didn't anticipate. Database connections will exhaust faster than compute. Your cache will become a bottleneck. Regional limits will bite you when you expand geographically. And when capacity fails, it fails catastrophically, not gracefully, not with a warning, just suddenly your system can't handle the load.
 
 Capacity planning in cloud is different from on-premises, but it's not optional. You still need to understand your demand patterns, map them to infrastructure, and validate that your system won't fall over under realistic load. The difference is that cloud lets you handle spiky demand with auto-scaling instead of building for peak, which is good. But it also masks the real constraints that still exist, which is bad if you don't know where they are.
 
-This post walks through capacity planning as it actually works in cloud environments—the math, the tools, the things that typically go wrong, and the process for staying ahead of it.
+This post walks through capacity planning as it actually works in cloud environments, the math, the tools, the things that typically go wrong, and the process for staying ahead of it.
 
 ## Understanding Your Demand Patterns
 
@@ -17,7 +17,7 @@ Before you size anything, you need to know what "normal" looks like. Most system
 
 **Daily patterns** are usually the first thing you notice. Traffic is typically higher during business hours and lower at night. An e-commerce platform might see peak traffic around lunchtime when office workers are browsing during breaks. A B2B SaaS might see traffic when Europeans are working (morning US time) and when Americans are working (afternoon US time), with a lull in the middle of the night. These patterns matter because they tell you when you need capacity and when you can scale down.
 
-**Weekly patterns** exist too. Retail traffic is often higher on weekdays and even higher on Fridays. Some businesses see Monday spikes (people catching up on email, starting projects). Social media platforms see different traffic on weekends—more casual browsing, less work-related usage. If you don't know your weekly pattern, you might assume Monday needs the same capacity as Friday when the opposite is true.
+**Weekly patterns** exist too. Retail traffic is often higher on weekdays and even higher on Fridays. Some businesses see Monday spikes (people catching up on email, starting projects). Social media platforms see different traffic on weekends, more casual browsing, less work-related usage. If you don't know your weekly pattern, you might assume Monday needs the same capacity as Friday when the opposite is true.
 
 **Seasonal variations** can be huge. Tax software gets most of its traffic in March and April. Retail gets hammered during holiday shopping. Airlines see spikes around school vacations and holiday travel periods. Universities have dramatic capacity swings between semesters. If you're planning capacity without accounting for seasonal demand, you're either wasting money for months or you'll get caught under-provisioned during peak season.
 
@@ -33,31 +33,31 @@ Real example: A SaaS platform I worked with thought they understood their traffi
 
 Here's something that trips up every architect I know at least once: stateless and stateful systems have completely different capacity models, and most people don't account for this difference.
 
-Stateless systems are lovely to scale. Your API instances don't care which request goes to which instance. They process it and move on. You can add or remove instances as needed. Load balancing is simple. Horizontal scaling works perfectly. You can decouple demand from resource availability—handle 10x traffic by spinning up 10x instances.
+Stateless systems are lovely to scale. Your API instances don't care which request goes to which instance. They process it and move on. You can add or remove instances as needed. Load balancing is simple. Horizontal scaling works perfectly. You can decouple demand from resource availability, handle 10x traffic by spinning up 10x instances.
 
 Stateful systems are different. If a user's session lives in an instance's memory, that instance needs to be available when the user's next request comes in. You can't just kill instances arbitrarily. You need session affinity (sticky sessions), which breaks horizontal scaling. Or you need to store sessions in a distributed cache like Redis, which becomes its own bottleneck.
 
 When you have stateful systems, your capacity model changes. You can't simply say "we need 10 instances for 1000 requests/second." You need to think about session distribution, connection management, and how quickly sessions timeout.
 
-One team I worked with was running a real-time collaboration platform where users' editing sessions were stored in-memory on each app instance. They'd designed it assuming they could scale horizontally—more requests meant more instances. In practice, it became a nightmare. When they tried to scale from 5 to 15 instances for peak traffic, existing sessions got disconnected because load balancing moved requests to new instances that didn't have that session. They had to implement sticky sessions, which defeated the purpose of horizontal scaling. When they tried to scale down, they had to gracefully drain instances (stop sending new requests, wait for existing sessions to exit). The whole thing became complicated and fragile.
+One team I worked with was running a real-time collaboration platform where users' editing sessions were stored in-memory on each app instance. They'd designed it assuming they could scale horizontally, more requests meant more instances. In practice, it became a nightmare. When they tried to scale from 5 to 15 instances for peak traffic, existing sessions got disconnected because load balancing moved requests to new instances that didn't have that session. They had to implement sticky sessions, which defeated the purpose of horizontal scaling. When they tried to scale down, they had to gracefully drain instances (stop sending new requests, wait for existing sessions to exit). The whole thing became complicated and fragile.
 
 The lesson: stateful systems need capacity planning for connection management, session distribution, and graceful shutdown. You can't treat them like stateless APIs.
 
-Session storage affects this too. If you store sessions in-memory per instance, you're limited by how many sessions you can hold on a single machine—typically a few thousand depending on session size. If you store sessions in Redis, you need Redis capacity planning. If you store them in the database, you're adding database load that doesn't show up as straightforward queries. Each approach has capacity implications.
+Session storage affects this too. If you store sessions in-memory per instance, you're limited by how many sessions you can hold on a single machine, typically a few thousand depending on session size. If you store sessions in Redis, you need Redis capacity planning. If you store them in the database, you're adding database load that doesn't show up as straightforward queries. Each approach has capacity implications.
 
 ## Database Capacity: Where Most Systems Actually Break
 
 Database is where theory meets reality and reality usually wins. Your app instances can scale horizontally, but your database is frequently the bottleneck.
 
-**Connection pooling** is the first thing that gets you. Each app instance needs a connection to the database to execute queries. Most connection pool libraries default to something like 20-50 connections per instance. If you have 20 app instances with a default pool of 20 connections each, you're using 400 connections to your database. Your database has a maximum—often in the thousands, but not unlimited.
+**Connection pooling** is the first thing that gets you. Each app instance needs a connection to the database to execute queries. Most connection pool libraries default to something like 20-50 connections per instance. If you have 20 app instances with a default pool of 20 connections each, you're using 400 connections to your database. Your database has a maximum, often in the thousands, but not unlimited.
 
 Here's the mistake I see constantly: someone spins up more app instances to handle higher load, and suddenly the database runs out of connections. The app instances are waiting to acquire a connection from the pool, requests queue up, response times balloon. The bottleneck isn't compute, it's database connections.
 
 I worked with a team that scaled their app from 10 instances to 30 instances to handle peak traffic. They'd never adjusted the connection pool size. Each instance still tried to hold 20 connections to the database. Suddenly the database had 600 connection requests and a max of 500. Requests started failing immediately. They had to scale back down, reduce the pool size on each instance, and distribute the available connections. It should've been a simple scaling operation; instead, it was an incident.
 
-**Read replicas** help but not the way people usually think. A read replica lets you distribute read queries, which reduces load on the primary database. But replicas have replication lag—writes happen on the primary, then replicate out to read replicas. If you need strongly consistent data, you can't use read replicas. If you can tolerate slightly stale data (which most systems can, for reads), read replicas are invaluable for capacity.
+**Read replicas** help but not the way people usually think. A read replica lets you distribute read queries, which reduces load on the primary database. But replicas have replication lag, writes happen on the primary, then replicate out to read replicas. If you need strongly consistent data, you can't use read replicas. If you can tolerate slightly stale data (which most systems can, for reads), read replicas are invaluable for capacity.
 
-The problem people run into is that they set up read replicas but don't actually use them. Your ORM might need specific configuration to route reads to replicas. Or your connection strings default to the primary. Setting up read replicas and then routing all queries to the primary doesn't improve capacity—it just wastes money.
+The problem people run into is that they set up read replicas but don't actually use them. Your ORM might need specific configuration to route reads to replicas. Or your connection strings default to the primary. Setting up read replicas and then routing all queries to the primary doesn't improve capacity, it just wastes money.
 
 **Write capacity** is usually the real limit. If 90% of your traffic is reads, read replicas can handle the scale. But if your workload is 40% writes, you're stuck with the write capacity of a single database instance. You can't scale writes across multiple databases without sharding, which is complex and usually not worth it unless you're already at massive scale.
 
@@ -79,7 +79,7 @@ So you add a read replica. Now reads (which are 70% of your traffic, let's say) 
 
 For caching: if you cache 30% of read results, you drop database load to 147,000 read QPS instead of 105,000. That's still 15,000 queries per second to the read replicas, so you still need 2 replicas. But now you need a cache cluster that handles 50,000 cache gets per second. A single Redis node can handle about 50,000 ops per second, so you're borderline. If your cache hit rate is 40% instead of 30%, you're fine. If it's 20%, you need more cache servers.
 
-The point: capacity isn't just about compute. It's about understanding the cascade—compute → database → cache → storage → network. Each layer has limits and interactions.
+The point: capacity isn't just about compute. It's about understanding the cascade, compute → database → cache → storage → network. Each layer has limits and interactions.
 
 ## Cache Sizing and Eviction
 
@@ -91,9 +91,9 @@ Here's the trap: you size your cache without knowing your hit rate. You assume y
 
 The right approach is to start with a small cache, measure hit rate in production, and size up from there. A cache that's 60% full with 80% hit rate is better than a cache that's 20% full with 70% hit rate. More data in the cache means better hit rates (usually), up to a point.
 
-**Eviction strategies** matter. LRU (Least Recently Used) is common—when the cache is full, evict the thing that hasn't been accessed recently. LFU (Least Frequently Used) evicts things that are accessed rarely. FIFO (First In First Out) evicts the oldest item. Each strategy makes different assumptions about access patterns. For most web workloads, LRU works well. For workloads with distinct hot and cold data, LFU might be better.
+**Eviction strategies** matter. LRU (Least Recently Used) is common, when the cache is full, evict the thing that hasn't been accessed recently. LFU (Least Frequently Used) evicts things that are accessed rarely. FIFO (First In First Out) evicts the oldest item. Each strategy makes different assumptions about access patterns. For most web workloads, LRU works well. For workloads with distinct hot and cold data, LFU might be better.
 
-**Cache coherency** becomes a problem when you have multiple caches or when data changes frequently. If you cache something for 5 minutes and it changes after 3 minutes, users see stale data. If you have multiple cache clusters, they need to stay in sync. Cache invalidation is famously hard—there are only two hard problems in computer science: cache invalidation and off-by-one errors.
+**Cache coherency** becomes a problem when you have multiple caches or when data changes frequently. If you cache something for 5 minutes and it changes after 3 minutes, users see stale data. If you have multiple cache clusters, they need to stay in sync. Cache invalidation is famously hard, there are only two hard problems in computer science: cache invalidation and off-by-one errors.
 
 I watched a team set up a massive Redis cluster (terabytes of data) expecting to solve all their performance problems. Turns out they were caching things that change constantly. Their cache hit rate was 15% and they were wasting terabytes of memory. They shrunk the cache down to gigabytes focused on truly hot data and hit rate jumped to 80%. Same workload, 1/100th the cache.
 
@@ -103,9 +103,9 @@ Most cloud systems start in a single region. Then they grow and you need to expa
 
 **Single region capacity limits** exist but are far enough away that most people don't worry about them. AWS has a default limit on vCPUs per account per region (you can request increases). Azure has similar limits. Most teams will hit business constraints (cost, latency, regulatory) before hitting regional limits. But if you're running massive scale, regional limits are real.
 
-**Multi-region complexity** is the issue. If your data lives in Region A and your users are in Region B, they experience latency fetching data. So you replicate data to Region B. But now your data is inconsistent—if you write in Region A and immediately read in Region B, you might get stale data. The replication lag is real.
+**Multi-region complexity** is the issue. If your data lives in Region A and your users are in Region B, they experience latency fetching data. So you replicate data to Region B. But now your data is inconsistent, if you write in Region A and immediately read in Region B, you might get stale data. The replication lag is real.
 
-If you need strong consistency across regions, you're limited by the speed of light and network latency. You can't make a write in Region A and have it immediately visible in Region B—that's a physics problem. Most systems accept eventual consistency (writes are eventually visible everywhere) and manage the inconsistency in application logic.
+If you need strong consistency across regions, you're limited by the speed of light and network latency. You can't make a write in Region A and have it immediately visible in Region B, that's a physics problem. Most systems accept eventual consistency (writes are eventually visible everywhere) and manage the inconsistency in application logic.
 
 **Data affinity** matters. If all your user data lives in one region and all your inference workloads are in another region, you're constantly moving data between regions, paying for egress. Better to compute near the data.
 
@@ -143,7 +143,7 @@ The key insight: planning for average capacity with spike handling (via on-deman
 
 You can't predict everything. Markets crash, a competitor goes down and their traffic comes to you, a TV commercial mentions your product, a malicious actor targets your system with a botnet. Your capacity plan needs to handle the unpredictable.
 
-**Circuit breakers** are your friend here. A circuit breaker is a pattern where you monitor the health of a downstream service and stop sending requests if it's degraded. If your database is timing out on 50% of queries, you circuit break—stop sending it new queries, start failing fast, let the database recover instead of piling on more traffic.
+**Circuit breakers** are your friend here. A circuit breaker is a pattern where you monitor the health of a downstream service and stop sending requests if it's degraded. If your database is timing out on 50% of queries, you circuit break, stop sending it new queries, start failing fast, let the database recover instead of piling on more traffic.
 
 This prevents cascading failures. Without circuit breakers: Database gets slow → app instances timeout waiting for database → app instance connection pool fills up → new requests queue → memory usage spikes → app crashes → suddenly users can't connect to anything.
 
@@ -172,9 +172,9 @@ scaling_policy:
   scale_down_cooldown: 300s  # Wait 5 min after scaling down before checking again
 ```
 
-**Lag in scaling** is real. It takes time for a metric to indicate you need more capacity. It takes more time for the auto-scaler to decide to scale. It takes even more time for new instances to spin up and become ready. By the time new instances are handling traffic, the spike might be passing. This is why most teams scale to handle p99 demand, not average demand—you need headroom for the inevitable lag.
+**Lag in scaling** is real. It takes time for a metric to indicate you need more capacity. It takes more time for the auto-scaler to decide to scale. It takes even more time for new instances to spin up and become ready. By the time new instances are handling traffic, the spike might be passing. This is why most teams scale to handle p99 demand, not average demand, you need headroom for the inevitable lag.
 
-**Thrashing** happens when your auto-scaling is too aggressive. You scale up, then a few seconds later a metric shows you don't need the capacity, so you scale down, then immediately you need to scale up again. This wastes resources and money, and causes instability. Cooldown periods help prevent this, but they're a balance—too long and you don't respond to changes; too short and you thrash.
+**Thrashing** happens when your auto-scaling is too aggressive. You scale up, then a few seconds later a metric shows you don't need the capacity, so you scale down, then immediately you need to scale up again. This wastes resources and money, and causes instability. Cooldown periods help prevent this, but they're a balance, too long and you don't respond to changes; too short and you thrash.
 
 **Scale-down risk** is that you might lose requests while scaling down. If you're handling 50K RPS across 50 instances and you scale down to 40 instances, those 10 instances get a SIGTERM signal and stop accepting new requests. But the load balancer might have a lag updating its list of healthy instances. A few requests might still get routed to instances that are shutting down and those requests get dropped. Most cloud platforms handle this with connection draining (wait for in-flight requests to complete before killing the instance), but it's not perfect.
 
@@ -211,7 +211,7 @@ Capacity planning isn't a one-time exercise. Demand changes, your system changes
 
 **Seasonal forecasting**: If you have seasonal demand, you need to plan for it. Tax software in Q1, retail in Q4. Plan your capacity increase 4-6 weeks before peak season. Spinning up infrastructure takes time.
 
-**Growth planning**: If you're growing 10% month-over-month, your capacity needs change. Every 6-7 months you're essentially doubling. Plan for that. Running at 90% capacity is risky—you have no headroom for unexpected spikes.
+**Growth planning**: If you're growing 10% month-over-month, your capacity needs change. Every 6-7 months you're essentially doubling. Plan for that. Running at 90% capacity is risky, you have no headroom for unexpected spikes.
 
 **Architectural changes** affect capacity. A new feature that's more computationally expensive. A refactor that's slower. A new dependency. These can suddenly make your old capacity plans obsolete.
 
@@ -223,7 +223,7 @@ Capacity planning isn't a one-time exercise. Demand changes, your system changes
 
 ## Conclusion
 
-Capacity planning in cloud isn't harder than on-premises—it's different. You're not constrained by the server hardware in your datacenter, but you're constrained by database limits, cache limits, regional limits, and cost. The good news is that cloud lets you be more dynamic—you can scale horizontally instead of predicting peak and building for it. The bad news is you still need to think carefully about what constrains your system.
+Capacity planning in cloud isn't harder than on-premises, it's different. You're not constrained by the server hardware in your datacenter, but you're constrained by database limits, cache limits, regional limits, and cost. The good news is that cloud lets you be more dynamic, you can scale horizontally instead of predicting peak and building for it. The bad news is you still need to think carefully about what constrains your system.
 
 Start with demand modeling. Understand your traffic patterns. Run load tests to find bottlenecks. Build your scaling policies based on what you learn. Monitor in production and adjust. And remember: capacity is like an iceberg. The compute part (what most people think about) is visible. The database, cache, network, and state management (where things usually break) is underwater.
 
