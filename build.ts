@@ -609,7 +609,7 @@ const aboutPageContent = `
       <ul>
         <li>Kim McAullife: My NEST instructor at Microsoft, for teaching me how to combine what I learn and how to teach others.</li>
         <li>Bill Boswell: For teaching a hungry young engineer how to be approachable, welcoming, and how Active Directory really works.</li>
-        <li>Ed Wilson: The original "Scripting Guy", for the blog and the Scripting Games, which were fun and educational.</li>
+        <li>Ed Wilson: The original "Scripting Guy" for the blog and the Scripting Games, which were fun and educational.</li>
         <li>Jeff Hicks and Don Jones: For showing me how to write materials that engage people.</li>
         <li>Jeff Snover and Mark Russinovich: For showing me how to be a technologist, and how to think about technology in a strategic way, and being friggin' brilliant.</li>
         <li>Jason Helmick and Mike Pfeiffer: The original Phoenix PowerShell User Group crew, for staying in touch and bring awesome.</li>
@@ -630,8 +630,8 @@ const aboutPageContent = `
 
       <h2>Philosophy</h2>
       <p>Technology is an art and a science.</p>
-      <p>I believe in incremential improvement.
-      <p>As a geek that can talk, I try to present complex concepts in an accessible way.</p>
+      <p>Incremential improvement is easier than perfection in transformative change.</p>
+      <p>Be a geek that can talk and present complex concepts in an accessible way.</p>
       <p>Simple solutions that work today are better than perfect solutions that never ship.</p>
       <p>Measure twice, build fifty times.</p>
     </div>
