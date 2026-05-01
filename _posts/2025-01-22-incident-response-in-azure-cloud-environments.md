@@ -2,7 +2,7 @@
 layout: post
 title: "Incident Response in Azure Cloud Environments"
 date: 2025-01-22
-tags: [security, operations, cloud, Azure]
+tags: [security, operations, cloud, azure]
 ---
 
 Most teams respond to incidents manually. Someone wakes up. They log into Azure. They poke around. They make changes. Then later, they figure out what went wrong.
