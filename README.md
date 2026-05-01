@@ -1,0 +1,1 @@
+Jekyll blog on derekhans.github.io and derekhans.com

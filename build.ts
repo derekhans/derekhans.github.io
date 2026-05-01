@@ -579,7 +579,7 @@ fs.mkdirSync(aboutDir, { recursive: true });
 const aboutPageContent = `
   <div class="about">
     <div class="about__intro">
-      <h1 class="about__title">About Derek Hans</h1>
+      <h1 class="about__title">About Me</h1>
       <p class="about__subtitle">I'm a technology veteran, a technologist at heart, and I write about what I learn along the way.</p>
     </div>
 
@@ -595,14 +595,38 @@ const aboutPageContent = `
         <li>Enterprise architecture and technology strategy</li>
       </ul>
 
+      <h2>Community Involvement</h2>
+      <p>When I was starting out, I had a lot of mentors, communities, and resources that helped shape me into the technologist I wanted to be.</p>
+      <br>
+      <p><b>PowerShell Subreddit</b>: I cofounded and manage the PowerShell subreddit, where I share knowledge and engage with the community. Managing the public forum is challenging and thankless, but important to have an independent venue to discuss, learn, ask questions without fear of ridicule.</p>
+      <p>The Powershell subreddit has become the largest independent PowerShell community in the world, with over 300k members and 34m unique views per month and growing. It's a place where people can ask questions, share projects, and connect with others who are passionate about PowerShell and automation.</p>
+      <br>
+      <p><b>Professional User Groups:</b> As an original member of the Phoenix, AZ PowerShell User Group in 2012, I know how important it can be to connect with others professionals face-to-face to learn and network. Through the PowerShell sub, we try to support user groups with materials, awareness, and engagement.</p> 
+      <br>
+      <p><b>The New Technologist</b>: I'm very passionate about mentoring and helping new engineers grow. To that end, I wrote <i>The New Technologist</i>, a book about how to grow your career and become a well-rounded technologist in today's rapidly changing technology landscape. Currently in final editing, it will be published and available soon.</p>
+      <br>
+      <p><b>Special Thanks To:</b>
+      <ul>
+        <li>Kim McAullife: My NEST instructor at Microsoft, for teaching me how to combine what I learn and how to teach others.</li>
+        <li>Bill Boswell: For teaching a hungry young engineer how to be approachable, welcoming, and how Active Directory really works.</li>
+        <li>Ed Wilson: The original "Scripting Guy", for the blog and the Scripting Games, which were fun and educational.</li>
+        <li>Jeff Hicks and Don Jones: For showing me how to write materials that engage people.</li>
+        <li>Jeff Snover and Mark Russinovich: For showing me how to be a technologist, and how to think about technology in a strategic way, and being friggin' brilliant.</li>
+        <li>Jason Helmick and Mike Pfeiffer: The original Phoenix PowerShell User Group crew, for staying in touch and bring awesome.</li>
+        <li>Michael Shanko: For being a great mentor, leader and friend. I wouldn't be where I am without his guidance.</li>
+        <li>My many mentors, colleagues, and friends who have shared their knowledge, challenged my thinking, and supported me along the way.</li>
+      </ul>
+
       <h2>Background</h2>
-      <p>With years of experience across enterprise technology, I've helped organizations of all sizes transform their digital capabilities. There aren't many practices I haven't touched. From startups to Fortune 500 companies, I've seen what works and what doesn't when it comes to technology adoption.</p>
-      <p>This scratchpad is where I document my thinking, share lessons learned, and explore new ideas in the ever-evolving world of technology.</p>
+      <p>With 25 years of experience across enterprise technology, I've helped organizations of all sizes transform their digital capabilities. There aren't many practices I haven't touched. From startups to Fortune 500 companies, I've seen what works and what doesn't when it comes to technology adoption, and have the battle scars to prove it.</p>
+      <p>This scratchpad is where I document my thinking, give back, share lessons learned, and explore new ideas in the ever-evolving world of technology.</p>
       
       <h2>Certifications</h2>
-      <p><b>Microsoft Certified:</b> Azure Solutions Architect Expert</p>
-      <p><b>Microsoft Certified:</b> DevOps Engineer Expert</p>
-      <p><b>Microsoft Certified:</b> Cybersecurity Architect Expert</p>
+      <ul>
+        <li><b>Microsoft Certified:</b> Azure Solutions Architect Expert</li>
+        <li><b>Microsoft Certified:</b> DevOps Engineer Expert</li>
+        <li><b>Microsoft Certified:</b> Cybersecurity Architect Expert</li>
+      </ul>
 
       <h2>Philosophy</h2>
       <p>Technology is an art and a science.</p>
