@@ -603,7 +603,7 @@ const aboutPageContent = `
       <br>
       <p><b>Professional User Groups:</b> As an original member of the Phoenix, AZ PowerShell User Group in 2012, I know how important it can be to connect with others professionals face-to-face to learn and network. Through the PowerShell sub, we try to support user groups with materials, awareness, and engagement.</p> 
       <br>
-      <p><b>The New Technologist</b>: I'm very passionate about mentoring and helping new engineers grow. To that end, I wrote <i>The New Technologist</i>, a book about how to grow your career and become a well-rounded technologist in today's rapidly changing technology landscape. Currently in final editing, it will be published and available soon.</p>
+      <p><b>The New Technologist</b>: I'm very passionate about mentoring and helping new engineers grow. To that end, I wrote <i>The New Technologist</i>, a book about how to grow your career and become a well-rounded technology professional in today's rapidly changing business landscape. Currently in final editing, it will be published and available soon.</p>
       <br>
       <p><b>Special Thanks To:</b>
       <ul>
