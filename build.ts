@@ -580,7 +580,7 @@ const aboutPageContent = `
   <div class="about">
     <div class="about__intro">
       <h1 class="about__title">About Me</h1>
-      <p class="about__subtitle">I'm a technology veteran, a technologist at heart, and I write about what I learn along the way.</p>
+      <p class="about__subtitle">Hi! I'm Derek, a technology veteran, technologist at heart, and I write about whatever I learn from what I'm working on.</p>
     </div>
 
     <div class="about__content">
@@ -588,11 +588,12 @@ const aboutPageContent = `
       <p>I believe that a true technologist specializes but learns enough to understand the big picture. My work spans:</p>
       <ul>
         <li>Microsoft Azure and cloud architecture</li>
-        <li>Platform engineering and developer experience</li>
-        <li>Identity management and Zero Trust security</li>
-        <li>AI/ML strategy and implementation</li>
-        <li>Cybersecurity and risk management</li>
-        <li>Enterprise architecture and technology strategy</li>
+        <li>Digital experience, unified communications, and productivity</li>
+        <li>Platform engineering, DevOps, and developer experience</li>
+        <li>Identity and access management, governance, and cryptography</li>
+        <li>AI/ML strategy, development, and implementation</li>
+        <li>Cybersecurity, resiliency, and risk management</li>
+        <li>Enterprise architecture, servant leadership, and technology strategy</li>
       </ul>
 
       <h2>Community Involvement</h2>
