@@ -598,7 +598,7 @@ const aboutPageContent = `
       <h2>Community Involvement</h2>
       <p>When I was starting out, I had a lot of mentors, communities, and resources that helped shape me into the technologist I wanted to be.</p>
       <br>
-      <p><b>PowerShell Subreddit</b>: I cofounded and manage the PowerShell subreddit, where I share knowledge and engage with the community. Managing the public forum is challenging and thankless, but important to have an independent venue to discuss, learn, ask questions without fear of ridicule.</p>
+      <p><b>PowerShell Subreddit</b>: I cofounded and manage the PowerShell subreddit, where I share knowledge and engage with the community. Managing the public forum is challenging, but important for new and experienced engineers to have an independent venue to discuss, learn, share, and ask questions without fear. (looking at you Stack Overflow)</p>
       <p>The Powershell subreddit has become the largest independent PowerShell community in the world, with over 300k members and 34m unique views per month and growing. It's a place where people can ask questions, share projects, and connect with others who are passionate about PowerShell and automation.</p>
       <br>
       <p><b>Professional User Groups:</b> As an original member of the Phoenix, AZ PowerShell User Group in 2012, I know how important it can be to connect with others professionals face-to-face to learn and network. Through the PowerShell sub, we try to support user groups with materials, awareness, and engagement.</p> 
