@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "API Authentication through Azure Entra and API Management"
-date: 2026-05-09
+title: "API Authentication Through Azure Entra and API Management"
+date: 2026-05-08
 tags: [azure, api, identity, entra]
 ---
 
