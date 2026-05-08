@@ -38,11 +38,11 @@
 - [ ] Link projects to individual project pages
 
 ## Blog Post Ideas and Changes
-- [ ] Add a picture radar on the 2025-2-11 technology radar post
 - [ ] Post on Microsoft license mobility on GCP and other cloud providers
 - [ ] Post on identity inventory discovery on a large scale
 - [ ] Post about identity security in the age of Claude Mythos
 - [ ] Post on multi-tenancy in M&A scenarios
 - [ ] Post on resource availability in high risk/compliance regions like China in the age of cloud and SaaS
+- [ ] Post on API authentication in Azure with Entra and APIM
 
 
