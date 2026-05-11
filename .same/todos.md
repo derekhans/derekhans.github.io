@@ -43,5 +43,7 @@
 - [ ] Post about identity security in the age of Claude Mythos
 - [ ] Post on multi-tenancy in M&A scenarios
 - [ ] Post on resource availability in high risk/compliance regions like China in the age of cloud and SaaS
+- [ ] Post on Identity Management as a tapestry, a practice of rube goldberg coordination
+
 
 
